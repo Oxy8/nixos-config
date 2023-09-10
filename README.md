@@ -1,7 +1,23 @@
-# nixos-config
+# Install
 
-chown -R *user* /etc/nixos  
+cd /etc/nixos  
 
-SSH ed25519 key needs to be generated manually.  
+sudo clone git@<span></span>github.com:Oxy8/nixos-config.git .  
 
-User password needs to be set manually using passwd.
+*(dont forget the . at the end)*  
+
+* SSH ed25519 key needs to be generated manually.  
+
+* Password needs to be set manually using passwd.  
+
+---
+
+# Rebuild
+
+sudo nixos-rebuild boot --flake .#  
+
+---
+
+# Update
+
+nix flake update  
