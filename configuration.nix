@@ -183,8 +183,8 @@
     # As of 17-03-2023: 
     # * wireplumber is causing an OOM state due to a bad memory leak.
     # * wireplumber also seems to be responsible for media being paused when changing volume using XF86Audio[Raise|Lower]Volume keys
-    media-session.enable = true;
-    wireplumber.enable = false;
+    # media-session.enable = true;
+    # wireplumber.enable = false;
   };
 
   # -------------------------------------------------------------------
