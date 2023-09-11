@@ -2,7 +2,9 @@
 
 cd /etc/nixos  
 
-sudo clone git@<span></span>github.com:Oxy8/nixos-config.git .  
+git clone git@<span></span>github.com:Oxy8/nixos-config.git .  
+
+(Gotta use sudo or chown)  
 
 *(dont forget the . at the end)*  
 
