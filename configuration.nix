@@ -20,6 +20,7 @@
 
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
+  
 
   # Enable broadcom drivers
   boot.extraModulePackages = [ config.boot.kernelPackages.broadcom_sta ];
@@ -34,7 +35,7 @@
 
   # -------------------------------------------------------------------
 
-  networking.hostName = "nixos"; # Define your hostname.
+  networking.hostName = "B490"; # Define your hostname.
 
   # Enable networking
   networking.networkmanager.enable = true;
