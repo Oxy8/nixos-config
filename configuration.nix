@@ -209,6 +209,7 @@
       gnome.dconf-editor
       discord
       prismlauncher
+      neovim
     ];
   };
 
