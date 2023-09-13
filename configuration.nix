@@ -165,8 +165,6 @@
   
   # Leave it enabled for increasing the chances of being able to use a foreign printer, but it serves
   # no purpose to the brother printer at home, which requires drivers to be installed.
-  # It may be possible to make the printer at home work without installing drivers,
-  # but my efforts so far have been in vain.
 
   # -------------------------------------------------------------------
 
@@ -180,12 +178,6 @@
     alsa.support32Bit = true;
     pulse.enable = true;
 
-    # Use the example session manager instead of wirepumbler.
-    # As of 17-03-2023: 
-    # * wireplumber is causing an OOM state due to a bad memory leak.
-    # * wireplumber also seems to be responsible for media being paused when changing volume using XF86Audio[Raise|Lower]Volume keys
-    # media-session.enable = true;
-    # wireplumber.enable = false;
   };
 
   # -------------------------------------------------------------------
