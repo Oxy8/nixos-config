@@ -24,9 +24,8 @@
 
   # Enable broadcom drivers
   boot.extraModulePackages = [ config.boot.kernelPackages.broadcom_sta ];
-  boot.kernelModules = [ "kvm-intel" "wl" ]; # set of kernel modules loaded in second stage of boot process
-  boot.initrd.kernelModules = [ "kvm-intel" "wl" ]; # list of modules always loaded by the initrd, don't know if really necessary
-  # It may be possible to disable initramfs entirely, check LinuxFromScratch post about it.
+  boot.kernelModules = [ "wl" ]; # set of kernel modules loaded in second stage of boot process
+  boot.initrd.kernelModules = [ "kvm-intel"]; # list of modules always loaded by the initrd, don't know if really necessary
 
   # -------------------------------------------------------------------
 
@@ -139,16 +138,16 @@
     ''bash-prompt-prefix = \[$(tput setaf 27)\](nix develop) \[$(tput sgr0)\]'';  
   
   # -------------------------------------------------------------------
-  # Set additional bash aliases
 
+  # Sets additional bash aliases
   programs.bash.shellAliases = {
     ll = "ls -l";
     mv = "mv -i";
   };
 
   # -------------------------------------------------------------------
-  # Make bash auto-completion case-insensitive
 
+  # Make bash auto-completion case-insensitive
   environment.etc.inputrc.source = ./inputrc;
   
   # -------------------------------------------------------------------
@@ -177,7 +176,6 @@
     alsa.enable = true;
     alsa.support32Bit = true;
     pulse.enable = true;
-
   };
 
   # -------------------------------------------------------------------
@@ -206,8 +204,10 @@
   };
 
   # -------------------------------------------------------------------
+
   # Needed for Gnome-Boxes
-	virtualisation.libvirtd.enable = true;
+  virtualisation.libvirtd.enable = true;
+	
   # -------------------------------------------------------------------
 
   # List packages installed in system profile.
