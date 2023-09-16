@@ -24,7 +24,7 @@
 
   # Enable broadcom drivers
   boot.extraModulePackages = [ config.boot.kernelPackages.broadcom_sta ];
-  boot.kernelModules = [ "wl" ]; # set of kernel modules loaded in second stage of boot process
+  boot.kernelModules = [ "kvm-intel" "wl" ]; # set of kernel modules loaded in second stage of boot process
   boot.initrd.kernelModules = [ "kvm-intel" "wl" ]; # list of modules always loaded by the initrd, don't know if really necessary
   # It may be possible to disable initramfs entirely, check LinuxFromScratch post about it.
 
@@ -257,7 +257,20 @@
   # -------------------------------------------------------------------
 
   # Enable the OpenSSH daemon.
-  services.openssh.enable = true;
+  services.openssh = {
+  	enable = true;
+  	hostKeys = [
+	  {
+	    bits = 4096;
+	    path = "/etc/ssh/ssh_host_rsa_key";
+	    type = "rsa";
+	  }
+	  {
+	    path = "/etc/ssh/ssh_host_ed25519_key";
+	    type = "ed25519";
+	  }
+	];
+  };
 
   # Specify the prefered algorithms the client wants to use when authenticating using a host key.
   # Needed to connect to portal.inf.ufrgs.br via ssh.
