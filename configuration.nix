@@ -279,7 +279,13 @@
 
   # Specify the prefered algorithms the client wants to use when authenticating using a host key.
   # Needed to connect to portal.inf.ufrgs.br via ssh.
-  programs.ssh.hostKeyAlgorithms = ["ssh-rsa" "ssh-ed25519"];  
+  programs.ssh.hostKeyAlgorithms = ["ssh-rsa" "ssh-ed25519"];
+
+  programs.ssh.extraConfig =
+  "
+  Host *.inf.ufrgs.br
+  User ekuster
+  ";
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions
