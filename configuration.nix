@@ -203,6 +203,7 @@
       gnome.gnome-boxes
       gnome.dconf-editor
       discord
+      spotify
       prismlauncher
       neovim
     ];
