@@ -185,6 +185,11 @@
 
   # -------------------------------------------------------------------
 
+  # Enable nix-ld for running unpatched dynamic libraries.
+  programs.nix-ld.enable = true;
+
+  # -------------------------------------------------------------------  
+
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.estevan = {
     isNormalUser = true;
