@@ -122,7 +122,7 @@
   console.keyMap = "br-abnt2";
 
   # Add fonts
-  fonts.fonts = with pkgs; [
+  fonts.packages = with pkgs; [
     fira-code
     fira-code-symbols
     ibm-plex
@@ -205,6 +205,7 @@
       mono # .NET replacement for wine
       fragments # Torrent
       gnome.ghex
+      gnome.rygel
       gnome.gnome-boxes
       gnome.dconf-editor
       discord
