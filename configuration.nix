@@ -23,8 +23,8 @@
   
 
   # Enable broadcom drivers
-  boot.extraModulePackages = [ config.boot.kernelPackages.broadcom_sta ];
-  boot.kernelModules = [ "wl" ]; # set of kernel modules loaded in second stage of boot process
+  boot.extraModulePackages = [ config.boot.kernelPackages.broadcom_sta pkgs.linuxPackages.v4l2loopback ];
+  boot.kernelModules = [ "wl" "v4l2loopback" ]; # set of kernel modules loaded in second stage of boot process
   boot.initrd.kernelModules = [ "kvm-intel"]; # list of modules always loaded by the initrd, don't know if really necessary
 
   # -------------------------------------------------------------------
