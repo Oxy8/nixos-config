@@ -205,7 +205,6 @@
       mono # .NET replacement for wine
       fragments # Torrent
       gnome.ghex
-      gnome.gnome-boxes
       gnome.dconf-editor
       discord
       spotify
@@ -218,18 +217,21 @@
 
   # -------------------------------------------------------------------
 
-  # Needed for Gnome-Boxes
-  virtualisation.libvirtd.enable = true;
-	
-  # -------------------------------------------------------------------
-
   # List packages installed in system profile.
   environment.systemPackages = with pkgs; [
     micro
     lshw
+    linuxKernel.packages.linux_6_1.vmware
+    vmware-workstation
   ];
 
   # -------------------------------------------------------------------
+
+  # vmware
+   virtualisation.vmware.host.enable = true;	
+
+  # -------------------------------------------------------------------
+  
 
   programs.git = {
     enable = true;
