@@ -197,6 +197,7 @@
     extraGroups = [ "networkmanager" "wheel" ];
     packages = with pkgs; [
       firefox
+      ungoogled-chromium
       ncdu
       bc
       onlyoffice-bin
@@ -220,6 +221,7 @@
   # List packages installed in system profile.
   environment.systemPackages = with pkgs; [
     micro
+    xsel # allows micro to interact with the system clipboard.
     lshw
     linuxKernel.packages.linux_6_1.vmware
     vmware-workstation
