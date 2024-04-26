@@ -223,14 +223,14 @@
     micro
     xsel # allows micro to interact with the system clipboard.
     lshw
-    linuxKernel.packages.linux_6_1.vmware
-    vmware-workstation
+    # linuxKernel.packages.linux_6_1.vmware
+    # vmware-workstation
   ];
 
   # -------------------------------------------------------------------
 
   # vmware
-   virtualisation.vmware.host.enable = true;	
+  # virtualisation.vmware.host.enable = true;	
 
   # -------------------------------------------------------------------
   
