@@ -202,8 +202,8 @@
       bc
       onlyoffice-bin
       gitg
-      wineWowPackages.stable
-      mono # .NET replacement for wine
+      # wineWowPackages.stable
+      # mono # .NET replacement for wine
       fragments # Torrent
       gnome.ghex
       gnome.dconf-editor
@@ -212,7 +212,6 @@
       prismlauncher
       neovim
       inputs.nix-software-center.packages.${system}.nix-software-center
-      dino
     ];
   };
 
