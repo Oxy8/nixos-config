@@ -99,12 +99,9 @@
 
   environment.gnome.excludePackages = (with pkgs; [
     gnome-tour
-  ]) ++ (with pkgs.gnome; [
-    tali # poker game
-    iagno # go game
-    hitori # sudoku game
-    atomix # puzzle game
   ]);
+  
+  services.gnome.games.enable = false;
 
   # Workaround for https://github.com/NixOS/nixpkgs/issues/103746#issuecomment-945091229
   systemd.services."getty@tty1".enable = false;
