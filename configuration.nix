@@ -188,7 +188,7 @@
   # -------------------------------------------------------------------  
 
   #  Enable thunderbird email client
-  programs.thunderbird.enable = true
+  programs.thunderbird.enable = true;
 
   # -------------------------------------------------------------------  
 
