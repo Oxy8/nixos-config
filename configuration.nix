@@ -187,6 +187,11 @@
 
   # -------------------------------------------------------------------  
 
+  #  Enable thunderbird email client
+  programs.thunderbird.enable = true
+
+  # -------------------------------------------------------------------  
+
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.estevan = {
     isNormalUser = true;
@@ -207,7 +212,6 @@
       discord
       spotify
       prismlauncher
-      neovim
       inputs.nix-software-center.packages.${system}.nix-software-center
     ];
   };
