@@ -88,11 +88,11 @@
   #services.gnome.rygel.enable = true;
 
   # Enable automatic login for the user.
-  services.xserver.displayManager.autoLogin.enable = true;
-  services.xserver.displayManager.autoLogin.user = "estevan";
+  services.displayManager.autoLogin.enable = true;
+  services.displayManager.autoLogin.user = "estevan";
 
   # Enable touchpad support (enabled default in most desktopManager).
-  services.xserver.libinput.enable = true;
+  services.libinput.enable = true;
 
   services.xserver.displayManager.gdm.enable = true;
   services.xserver.desktopManager.gnome.enable = true;
@@ -110,9 +110,9 @@
   # -------------------------------------------------------------------
 
   # Configure keymap in X11
-  services.xserver = {
+  services.xserver.xkb = {
     layout = "br";
-    xkbVariant = "";
+    variant = "";
   };
 
   # Configure console keymap
@@ -155,7 +155,7 @@
   # Enable Avahi and mDNS NSS
   services.avahi = {
   	enable = true;
-  	nssmdns = true;
+  	nssmdns4 = true;
   	openFirewall = true;
   };
   
@@ -187,11 +187,6 @@
 
   # -------------------------------------------------------------------  
 
-  #  Enable thunderbird email client
-  programs.thunderbird.enable = true;
-
-  # -------------------------------------------------------------------  
-
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.estevan = {
     isNormalUser = true;
@@ -213,6 +208,7 @@
       spotify
       prismlauncher
       inputs.nix-software-center.packages.${system}.nix-software-center
+      thunderbird
     ];
   };
 
