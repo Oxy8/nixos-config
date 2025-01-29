@@ -210,6 +210,7 @@
       inputs.nix-software-center.packages.${system}.nix-software-center
       thunderbird
       foliate
+      whatsapp-for-linux
     ];
   };
 
