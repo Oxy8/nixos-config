@@ -209,6 +209,7 @@
       prismlauncher
       inputs.nix-software-center.packages.${system}.nix-software-center
       thunderbird
+      foliate
     ];
   };
 
