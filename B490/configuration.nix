@@ -145,7 +145,7 @@
   # -------------------------------------------------------------------
 
   # Make bash auto-completion case-insensitive
-  environment.etc.inputrc.source = ./inputrc;
+  environment.etc.inputrc.source = /etc/nixos/B490/inputrc;
   
   # -------------------------------------------------------------------
 
