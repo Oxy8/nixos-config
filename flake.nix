@@ -8,22 +8,16 @@
 
   outputs = { nixpkgs, nix-software-center, ... }@inputs:
 
-  let
+	{
+		nixosConfigurations = {
 
-    system = "x86_64-linux";
-        
-  in {
-    nixosConfigurations = {
-      B490 = nixpkgs.lib.nixosSystem {
-
-      	inherit system;
-
-      	specialArgs = { inherit inputs; };
-
-      	modules = [
-      	  ./configuration.nix	
-      	];
-      };	
-    };
-  };
+			B490 = nixpkgs.lib.nixosSystem {
+			
+		      	system = "x86_64-linux";
+		      	specialArgs = { inherit inputs; };
+		      	modules = [ ./configuration.nix ];
+		      	
+			};	
+		};
+	};
 }
