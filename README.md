@@ -2,7 +2,7 @@
 
 cd /etc/nixos  
 
-git clone git@<span></span>github.com:Oxy8/nixos-config.git .  
+git clone https://github.com/Oxy8/nixos-config.git .  
 
 (Gotta use sudo or chown)  
 
@@ -10,13 +10,13 @@ git clone git@<span></span>github.com:Oxy8/nixos-config.git .
 
 * SSH ed25519 key needs to be generated manually.  
 
-* Password needs to be set manually using passwd.  
+* Password needs to be set manually  
 
 ---
 
 # Rebuild
 
-sudo nixos-rebuild boot --flake .#  
+sudo nixos-rebuild boot --flake .#_hostname_  
 
 ---
 
