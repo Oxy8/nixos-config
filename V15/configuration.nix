@@ -16,16 +16,10 @@
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
-  boot.loader.efi.efiSysMountPoint = "/boot/efi";
+  boot.loader.efi.efiSysMountPoint = "/boot";
 
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
-  
-
-  # Enable broadcom drivers
-  boot.extraModulePackages = [ config.boot.kernelPackages.broadcom_sta pkgs.linuxPackages.v4l2loopback ];
-  boot.kernelModules = [ "wl" ]; # set of kernel modules loaded in second stage of boot process
-  boot.initrd.kernelModules = [ "kvm-intel"]; # list of modules always loaded by the initrd, don't know if really necessary
 
   # -------------------------------------------------------------------
 
@@ -64,18 +58,12 @@
 
   # ------------------------------------------------------------------
   # Hardware acceleration
-  
-  nixpkgs.config.packageOverrides = pkgs: {
-    vaapiIntel = pkgs.vaapiIntel.override { enableHybridCodec = true; };
-  };
+
   
   hardware.opengl = {
     enable = true;
     extraPackages = with pkgs; [
-      #intel-media-driver # Intel Broadwell and Skylake 
-      vaapiIntel         
-      #vaapiVdpau # Other GPUs
-      #libvdpau-va-gl # Other GPUs
+      intel-media-driver
     ];
   };
   
@@ -145,7 +133,7 @@
   # -------------------------------------------------------------------
 
   # Make bash auto-completion case-insensitive
-  environment.etc.inputrc.source = /etc/nixos/V15/inputrc;
+  environment.etc.inputrc.source = ./inputrc;
   
   # -------------------------------------------------------------------
 
@@ -208,7 +196,7 @@
       inputs.nix-software-center.packages.${system}.nix-software-center
       thunderbird
       foliate
-      whatsapp-for-linux
+      openvpn
     ];
   };
 
@@ -301,6 +289,6 @@
   # this value at the release version of the first install of this system.
   # Before changing this value read the documentation for this option
   # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
-  system.stateVersion = "22.11"; # Did you read the comment?
+  system.stateVersion = "24.11"; # Did you read the comment?
 
 }
