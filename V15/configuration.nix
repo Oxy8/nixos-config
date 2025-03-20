@@ -31,8 +31,8 @@
   networking.hostName = "V15"; # Define your hostname.
 
   # Enable networking
-  networking.networkmanager.enable = true;
-  networking.networkmanager.plugins = [ pkgs.networkmanager-openvpn ];
+  # networking.networkmanager.enable = true;
+  # networking.networkmanager.plugins = [ pkgs.networkmanager-openvpn ];
 
   # Disables firewall
   networking.firewall.enable = false;
