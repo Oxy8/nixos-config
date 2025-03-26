@@ -70,6 +70,15 @@
   
   # ------------------------------------------------------------------
 
+  # Swap file.
+
+  swapDevices = [ {
+      device = "/var/swapfile";
+      size = 32*1024; # 32GB
+    } ];
+
+  # ------------------------------------------------------------------
+
   # Enable the X11 windowing system.
   services.xserver.enable = true;
 
