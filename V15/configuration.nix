@@ -72,6 +72,8 @@
 
   # Swap file and hibernation
 
+  systemd.sleep.extraConfig = "AllowHibernation=yes";
+
   services.logind.lidSwitch = "hibernate";
   
   boot.initrd.systemd.enable = true;
