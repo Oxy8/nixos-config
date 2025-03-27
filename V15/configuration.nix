@@ -70,8 +70,11 @@
   
   # ------------------------------------------------------------------
 
-  # Swap file.
+  # Swap file and hibernation
 
+  services.logind.lidSwitch = "hibernate";
+  
+  boot.initrd.systemd.enable = true;
   swapDevices = [ {
       device = "/var/swapfile";
       size = 32*1024; # 32GB
