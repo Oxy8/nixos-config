@@ -70,11 +70,7 @@
   
   # ------------------------------------------------------------------
 
-  # Swap file, suspend and hibernation
-
-  systemd.sleep.extraConfig = "AllowHibernation=yes";
-
-  services.logind.lidSwitch = "hibernate";
+  # Swap file and suspend
   
   # /etc/nixos/V15 $ find kernel | cpio -H newc --create > acpi_override
   # acpi_override has a modified version of dsdt.aml which allows for S3 sleep
@@ -88,7 +84,7 @@
   boot.initrd.systemd.enable = true;  
   swapDevices = [ {
       device = "/var/swapfile";
-      size = 32*1024; # 32GB
+      size = 8*1024; # 8GB
     } ];
 
   # ------------------------------------------------------------------
