@@ -61,7 +61,7 @@
   # Hardware acceleration
 
   
-  hardware.opengl = {
+  hardware.graphics = {
     enable = true;
     extraPackages = with pkgs; [
       intel-media-driver
@@ -173,8 +173,8 @@
   # -------------------------------------------------------------------
 
   # Enable sound with pipewire.
-  sound.enable = true;
-  hardware.pulseaudio.enable = false;
+  #hardware.alsa.enable = true;
+  services.pulseaudio.enable = false;
   security.rtkit.enable = true;
   services.pipewire = {
     enable = true;
@@ -208,8 +208,8 @@
       # wineWowPackages.stable
       # mono # .NET replacement for wine
       fragments # Torrent
-      gnome.ghex
-      gnome.dconf-editor
+      ghex
+      dconf-editor
       discord
       spotify
       prismlauncher
@@ -217,8 +217,11 @@
       thunderbird
       foliate
       openvpn
+      nnn
     ];
   };
+
+  services.fwupd.enable = true;
 
   # -------------------------------------------------------------------
 
