@@ -236,6 +236,19 @@
 
   # -------------------------------------------------------------------
 
+
+
+  virtualisation.docker.enable = true;
+
+  users.users.<myuser>.extraGroups = [ "docker" ];
+
+  virtualisation.docker.daemon.settings = {
+    data-root = "/home/estevan/Ambientes/.DOCKER";
+  };
+ 
+
+  # -------------------------------------------------------------------
+
   # vmware
   # virtualisation.vmware.host.enable = true;	
 
