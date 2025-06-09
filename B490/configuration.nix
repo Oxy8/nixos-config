@@ -202,8 +202,6 @@
       # wineWowPackages.stable
       # mono # .NET replacement for wine
       fragments # Torrent
-      gnome.ghex
-      gnome.dconf-editor
       discord
       spotify
       prismlauncher
