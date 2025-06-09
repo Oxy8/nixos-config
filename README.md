@@ -16,7 +16,7 @@ git clone https://github.com/Oxy8/nixos-config.git .
 
 # Rebuild
 
-sudo nixos-rebuild boot --flake .#_hostname_  
+sudo nixos-rebuild boot --flake .#_hostname_  --impure
 
 ---
 
