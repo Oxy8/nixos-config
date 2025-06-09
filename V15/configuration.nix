@@ -235,16 +235,14 @@
   ];
 
   # -------------------------------------------------------------------
+  # Docker
 
 
+#  virtualisation.docker.enable = true;
 
-  virtualisation.docker.enable = true;
-
-  users.users.<myuser>.extraGroups = [ "docker" ];
-
-  virtualisation.docker.daemon.settings = {
-    data-root = "/home/estevan/Ambientes/.DOCKER";
-  };
+#  virtualisation.docker.daemon.settings = {
+#    data-root = "/home/estevan/Ambientes/.DOCKER";
+#  };
  
 
   # -------------------------------------------------------------------
