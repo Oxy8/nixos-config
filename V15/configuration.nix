@@ -252,6 +252,14 @@
   # virtualisation.vmware.host.enable = true;	
 
   # -------------------------------------------------------------------
+  # VirtualBox
+
+
+  virtualisation.virtualbox.host.enable = true;
+  users.extraGroups.vboxusers.members = [ "estevan" ];
+
+
+  # -------------------------------------------------------------------
   
 
   programs.git = {
