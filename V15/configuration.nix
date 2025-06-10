@@ -148,6 +148,7 @@
   programs.bash.shellAliases = {
     ll = "ls -l";
     mv = "mv -i";
+    gted = "gnome-text-editor";
   };
 
   # -------------------------------------------------------------------
