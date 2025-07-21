@@ -203,9 +203,8 @@
     extraGroups = [ "networkmanager" "wheel" ];
     packages = with pkgs; [
       firefox
-      ungoogled-chromium
+      google-chrome
       onlyoffice-bin
-      gitg
       # wineWowPackages.stable
       # mono # .NET replacement for wine
       fragments # Torrent
@@ -219,6 +218,7 @@
       foliate
       openvpn
       nnn
+      pass
     ];
   };
 
@@ -228,8 +228,6 @@
 
   # List packages installed in system profile.
   environment.systemPackages = with pkgs; [
-    micro
-    xsel # allows micro to interact with the system clipboard.
     lshw
     # linuxKernel.packages.linux_6_1.vmware
     # vmware-workstation
