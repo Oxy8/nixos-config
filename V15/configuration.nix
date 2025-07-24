@@ -12,6 +12,9 @@
     ];
 
   # -------------------------------------------------------------------
+  
+  boot.kernelPackages = pkgs.linuxPackages_6_6;
+  
 
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
