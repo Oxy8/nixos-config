@@ -1,6 +1,5 @@
 
-# Edit this configuration file to define what should be installed on
-# your system.  Help is available in the configuration.nix(5) man page
+# Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
 { config, pkgs, inputs, ... }:
@@ -111,7 +110,7 @@
   services.gnome.games.enable = false;
   
   # Enable rygel
-  #services.gnome.rygel.enable = true;
+  services.gnome.rygel.enable = true;
 
   # Workaround for https://github.com/NixOS/nixpkgs/issues/103746#issuecomment-945091229
   systemd.services."getty@tty1".enable = false;
@@ -243,8 +242,8 @@
 
   #=-=-=-=-=
   # VirtualBox
-  virtualisation.virtualbox.host.enable = true;
-  users.extraGroups.vboxusers.members = [ "estevan" ];
+  #virtualisation.virtualbox.host.enable = true;
+  #users.extraGroups.vboxusers.members = [ "estevan" ];
 
 
   # -------------------------------------------------------------------
