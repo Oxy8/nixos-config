@@ -210,6 +210,7 @@
       openvpn
       nnn
       pass
+      veracrypt
     ];
   };
   
