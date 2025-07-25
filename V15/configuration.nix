@@ -10,42 +10,42 @@
     [ # Include the results of the hardware scan.
       ./hardware-configuration.nix
     ];
-
+    
   # -------------------------------------------------------------------
-  
-  boot.kernelPackages = pkgs.linuxPackages_6_6;
-  
-
-  # Bootloader.
-  boot.loader.systemd-boot.enable = true;
-  boot.loader.efi.canTouchEfiVariables = true;
-  boot.loader.efi.efiSysMountPoint = "/boot";
+  # NIX
 
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
 
-  # -------------------------------------------------------------------
-
   # Enable the "nix *" commands (expected to substitute the current "nix-*" commands) and flakes.
   nix.settings.experimental-features = ["nix-command" "flakes"];
+  
+  # Enable direnv
+  programs.direnv.enable = true;
+
+  # Enable nix-ld for running unpatched dynamic libraries.
+  programs.nix-ld.enable = true;
 
   # -------------------------------------------------------------------
+  # BOOTLOADER
+  
+  boot.loader.systemd-boot.enable = true;
+  boot.loader.efi.canTouchEfiVariables = true;
+  boot.loader.efi.efiSysMountPoint = "/boot";
 
-  networking.hostName = "V15"; # Define your hostname.
+  # -------------------------------------------------------------------
+  
+  networking.hostName = "V15";
 
-  # Enable networking
-  # networking.networkmanager.enable = true;
-  # networking.networkmanager.plugins = [ pkgs.networkmanager-openvpn ];
-
-  # Disables firewall
+  # -------------------------------------------------------------------
+  
   networking.firewall.enable = false;
 
   # -------------------------------------------------------------------
+  # LOCALE
 
-  # Set your time zone.
   time.timeZone = "America/Sao_Paulo";
 
-  # Select internationalisation properties.
   i18n.defaultLocale = "en_US.UTF-8";
 
   i18n.extraLocaleSettings = {
@@ -61,9 +61,8 @@
   };
 
   # ------------------------------------------------------------------
-  # Hardware acceleration
+  # HARDWARE ACCELERATION
 
-  
   hardware.graphics = {
     enable = true;
     extraPackages = with pkgs; [
@@ -72,8 +71,7 @@
   };
   
   # ------------------------------------------------------------------
-
-  # Swap file and suspend
+  # SWAP + SUSPEND
   
   # /etc/nixos/V15 $ find kernel | cpio -H newc --create > acpi_override
   # acpi_override has a modified version of dsdt.aml which allows for S3 sleep
@@ -82,7 +80,6 @@
   # sets S3 sleep as default
   boot.kernelParams = [ "mem_sleep_default=deep" ];
   
-
   # Swap file creation
   boot.initrd.systemd.enable = true;  
   swapDevices = [ {
@@ -90,21 +87,20 @@
       size = 8*1024; # 8GB
     } ];
 
+  # Temporary fix for computer not suspending properly when closing the lid.
+  boot.kernelPackages = pkgs.linuxPackages_6_6;
+
   # ------------------------------------------------------------------
+  # DESKTOP ENVIRONMENT
 
   # Enable the X11 windowing system.
   services.xserver.enable = true;
-
-  # Enable rygel
-  #services.gnome.rygel.enable = true;
 
   # Enable automatic login for the user.
   services.displayManager.autoLogin.enable = true;
   services.displayManager.autoLogin.user = "estevan";
 
-  # Enable touchpad support (enabled default in most desktopManager).
-  services.libinput.enable = true;
-
+  # Enables Gnome DE
   services.xserver.displayManager.gdm.enable = true;
   services.xserver.desktopManager.gnome.enable = true;
 
@@ -113,14 +109,18 @@
   ]);
   
   services.gnome.games.enable = false;
+  
+  # Enable rygel
+  #services.gnome.rygel.enable = true;
 
   # Workaround for https://github.com/NixOS/nixpkgs/issues/103746#issuecomment-945091229
   systemd.services."getty@tty1".enable = false;
   systemd.services."autovt@tty1".enable = false;
 
   # -------------------------------------------------------------------
+  # KEYBOARD
 
-  # Configure keymap in X11
+  # Configure keymap in X11 (XWayland compatibility) (don't know if needed, but it ain't hurting no one)
   services.xserver.xkb = {
     layout = "br";
     variant = "";
@@ -138,14 +138,13 @@
 
   
   # -------------------------------------------------------------------
+  # BASH
 
   # Sets PS1 appearance normally and when within a nix develop environment.
   programs.bash.promptInit =
     ''PS1="\[\e]0;\u@\h: \w\a\]\[$(tput bold)\]\[$(tput setaf 39)\]\u\[$(tput setaf 45)\]@\[$(tput setaf 51)\]\h \[$(tput setaf 195)\]\w \[$(tput sgr0)\]$ "'';
   nix.extraOptions = 
     ''bash-prompt-prefix = \[$(tput setaf 27)\](nix develop) \[$(tput sgr0)\]'';  
-  
-  # -------------------------------------------------------------------
 
   # Sets additional bash aliases
   programs.bash.shellAliases = {
@@ -154,12 +153,11 @@
     gted = "gnome-text-editor";
   };
 
-  # -------------------------------------------------------------------
-
   # Make bash auto-completion case-insensitive
   environment.etc.inputrc.source = ./inputrc;
   
   # -------------------------------------------------------------------
+  # PRINTING
 
   # Enable CUPS to print documents.
   services.printing.enable = true;
@@ -175,6 +173,7 @@
   # no purpose to the brother printer at home, which requires drivers to be installed.
 
   # -------------------------------------------------------------------
+  # SOUND
 
   # Enable sound with pipewire.
   #hardware.alsa.enable = true;
@@ -186,16 +185,6 @@
     alsa.support32Bit = true;
     pulse.enable = true;
   };
-
-  # -------------------------------------------------------------------
-
-  # Enable direnv
-  programs.direnv.enable = true;
-
-  # -------------------------------------------------------------------
-
-  # Enable nix-ld for running unpatched dynamic libraries.
-  programs.nix-ld.enable = true;
 
   # -------------------------------------------------------------------  
 
@@ -224,10 +213,12 @@
       pass
     ];
   };
-
+  
+  # Firmware Update Daemon
   services.fwupd.enable = true;
 
   # -------------------------------------------------------------------
+  # VM
 
   # List packages installed in system profile.
   environment.systemPackages = with pkgs; [
@@ -236,32 +227,28 @@
     # vmware-workstation
   ];
 
-  # -------------------------------------------------------------------
+
+  #=-=-=-=-=
   # Docker
-
-
-#  virtualisation.docker.enable = true;
-
-#  virtualisation.docker.daemon.settings = {
-#    data-root = "/home/estevan/Ambientes/.DOCKER";
-#  };
+  #  virtualisation.docker.enable = true;
+  #  virtualisation.docker.daemon.settings = {
+  #    data-root = "/home/estevan/Ambientes/.DOCKER";
+  #  };
  
-
-  # -------------------------------------------------------------------
-
-  # vmware
+ 
+  #=-=-=-=-=
+  # VMware
   # virtualisation.vmware.host.enable = true;	
 
-  # -------------------------------------------------------------------
+
+  #=-=-=-=-=
   # VirtualBox
-
-
   virtualisation.virtualbox.host.enable = true;
   users.extraGroups.vboxusers.members = [ "estevan" ];
 
 
   # -------------------------------------------------------------------
-  
+  # GIT
 
   programs.git = {
     enable = true;
@@ -291,15 +278,7 @@
   };
 
   # -------------------------------------------------------------------
-
-  # Since august 2022, github supports SSH commit verification, so GPG is not needed anymore
-  # https://github.blog/changelog/2022-08-23-ssh-commit-verification-now-supported/
-  # programs.gnupg.agent = {
-  #   enable = true;
-  #   enableSSHSupport = true;
-  # };
-
-  # -------------------------------------------------------------------
+  # SSH
 
   # Enable the OpenSSH daemon.
   services.openssh = {
@@ -326,6 +305,10 @@
   Host *.inf.ufrgs.br
   User ekuster
   ";
+  
+  
+  # -------------------------------------------------------------------
+  
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions
