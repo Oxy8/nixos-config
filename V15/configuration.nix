@@ -70,24 +70,54 @@
   };
   
   # ------------------------------------------------------------------
-  # SWAP + SUSPEND
+  # SWAP + SLEEP
+  
+  
+  services.logind.extraConfig = ''
+    InhibitDelayMaxSec=12
+  '';
+  
+  powerManagement.powerDownCommands = 
+    ''
+      # Check if DisplayLink pipes exist
+      if [ -p /tmp/PmMessagesPort_in ] && [ -f /tmp/PmMessagesPort_out ]; then
+        # Flush any bytes in pipe
+        while read -n 1 -t 1 SUSPEND_RESULT < /tmp/PmMessagesPort_out; do : ; done;
+        # Send suspend signal
+        echo "S" > /tmp/PmMessagesPort_in
+        # Wait with timeout for response
+        if read -n 1 -t 10 SUSPEND_RESULT < /tmp/PmMessagesPort_out; then
+          echo "DisplayLinkManager suspended successfully"
+        else
+          echo "DisplayLinkManager suspend timed out, continuing anyway"
+        fi
+      fi
+    '';
+  
+  #DEBUGGING:
+  #nix-shell -p s0ix-selftest-tool powertop
+  #sudo s0ix-selftest-tool -s
+  # boot.blacklistedKernelModules = [ "r8169" ];
+  
   
   # /etc/nixos/V15 $ find kernel | cpio -H newc --create > acpi_override
   # acpi_override has a modified version of dsdt.aml which allows for S3 sleep
   boot.initrd.prepend = [ "${/etc/nixos/V15/acpi_override}" ];
 
   # sets S3 sleep as default
-  boot.kernelParams = [ "mem_sleep_default=deep" ];
+  boot.kernelParams = [
+  	"mem_sleep_default=deep"
+  	"nvme.default_ps_max_latency_us=15000"
+  	"pcie_aspm.policy=powersupersave"
+  	# "acpi_osi=Linux"
+  ];
   
   # Swap file creation
   boot.initrd.systemd.enable = true;  
   swapDevices = [ {
       device = "/var/swapfile";
       size = 8*1024; # 8GB
-    } ];
-
-  # Temporary fix for computer not suspending properly when closing the lid.
-  boot.kernelPackages = pkgs.linuxPackages_6_6;
+  } ];
 
   # ------------------------------------------------------------------
   # DESKTOP ENVIRONMENT
@@ -135,6 +165,13 @@
     ibm-plex
   ];
 
+  # -------------------------------------------------------------------
+  # MOUSE 
+
+  # Stops receiver from entering low power mode and delaying initial mouse input.
+  services.udev.extraRules = ''
+    ACTION=="add", SUBSYSTEM=="usb", ATTR{idVendor}=="046d", ATTR{idProduct}=="c542", ATTR{power/control}="on"
+  '';
   
   # -------------------------------------------------------------------
   # BASH
@@ -209,8 +246,6 @@
       foliate
       openvpn
       nnn
-      pass
-      veracrypt
     ];
   };
   
@@ -223,6 +258,7 @@
   # List packages installed in system profile.
   environment.systemPackages = with pkgs; [
     lshw
+    rage
     # linuxKernel.packages.linux_6_1.vmware
     # vmware-workstation
   ];
