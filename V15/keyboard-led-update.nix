@@ -50,7 +50,7 @@ let
             return 1;
         }
 
-        sleep_ms(100);
+        sleep_ms(200);
 
         for (int i = 0; i < 2; ++i) {
             struct input_event ev;
@@ -62,7 +62,7 @@ let
             ev.value = 1;
             write(fd, &ev, sizeof(ev));
 
-            sleep_ms(50);
+            sleep_ms(100);
 
             memset(&ev, 0, sizeof(ev));
             gettimeofday(&ev.time, NULL);

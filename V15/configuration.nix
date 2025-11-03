@@ -74,7 +74,7 @@
   
   
   services.logind.extraConfig = ''
-    InhibitDelayMaxSec=12
+    InhibitDelayMaxSec=15
   '';
   
   powerManagement.powerDownCommands = 
@@ -107,9 +107,9 @@
   # sets S3 sleep as default
   boot.kernelParams = [
   	"mem_sleep_default=deep"
-  	"nvme.default_ps_max_latency_us=15000"
+  	"nvme.default_ps_max_latency_us=14000"
   	"pcie_aspm.policy=powersupersave"
-  	# "acpi_osi=Linux"
+  	# "acpi_osi=!!"
   ];
   
   # Swap file creation
@@ -246,6 +246,7 @@
       foliate
       openvpn
       nnn
+      anki
     ];
   };
   
