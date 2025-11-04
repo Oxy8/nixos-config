@@ -190,6 +190,7 @@
       spotify
       thunderbird
       foliate
+      teams-for-linux
     ];
   };
   
