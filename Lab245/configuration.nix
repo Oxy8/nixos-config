@@ -122,6 +122,7 @@
     fira-code
     fira-code-symbols
     ibm-plex
+    oswald
   ];
 
   # -------------------------------------------------------------------
@@ -155,9 +156,7 @@
   	nssmdns4 = true;
   	openFirewall = true;
   };
-  
-  # Leave it enabled for increasing the chances of being able to use a foreign printer, but it serves
-  # no purpose to the brother printer at home, which requires drivers to be installed.
+
 
   # -------------------------------------------------------------------
   # SOUND
@@ -190,6 +189,9 @@
       spotify
       thunderbird
       foliate
+      teams-for-linux
+      filezilla
+      inkscape
     ];
   };
   
@@ -212,16 +214,6 @@
   #    data-root = "/home/estevan/Ambientes/.DOCKER";
   #  };
  
- 
-  #=-=-=-=-=
-  # VMware
-  # virtualisation.vmware.host.enable = true;	
-
-
-  #=-=-=-=-=
-  # VirtualBox
-  #virtualisation.virtualbox.host.enable = true;
-  #users.extraGroups.vboxusers.members = [ "estevan" ];
 
 
   # -------------------------------------------------------------------
@@ -237,7 +229,7 @@
       };
       
       core = {
-      	editor = "micro";
+      	editor = "gnome-text-editor";
       };
       
       init = {
@@ -293,6 +285,6 @@
   # this value at the release version of the first install of this system.
   # Before changing this value read the documentation for this option
   # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
-  system.stateVersion = "24.11"; # Did you read the comment?
+  system.stateVersion = "25.05"; # Did you read the comment?
 
 }

@@ -1,14 +1,18 @@
+# Pre Install
+
+Generate SSH ed25519 key (ssh-keygen -t ed25519 -C "34687508+Oxy8@users.noreply.github.com")
+
+Add new key to github
+
 # Install
 
-cd /etc/nixos  
+cd /etc/nixos
 
-git clone https://github.com/Oxy8/nixos-config.git .  
+sudo chown -R estevan .
 
-(Gotta use sudo or chown)  
+git clone git@github.com:Oxy8/nixos-config.git .  
 
 *(dont forget the . at the end)*  
-
-* SSH ed25519 key needs to be generated manually.  
 
 * Password needs to be set manually  
 

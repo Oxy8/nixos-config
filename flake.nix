@@ -55,17 +55,14 @@
 					}
 		      	];
 			};
-		};
-		
-		nixosModules = {
-		# ...
-			declarativeHome = { ... }: {
-				config = {
-					home-manager.useGlobalPkgs = true;
-					home-manager.useUserPackages = true;
-				};
+
+			Lab245 = nixpkgs.lib.nixosSystem {
+			
+		      	system = "x86_64-linux";
+		      	specialArgs = { inherit inputs; };
+		      	modules = [ ./Lab245/configuration.nix ];
+		      	
 			};
 		};
-
 	};
 }
