@@ -35,10 +35,13 @@
   # -------------------------------------------------------------------
   
   networking.hostName = "V15";
-
-  # -------------------------------------------------------------------
   
   networking.firewall.enable = false;
+  
+  networking.networkmanager = {
+    enable = true;
+    plugins = [ pkgs.networkmanager-openvpn ]; 
+  };
 
   # -------------------------------------------------------------------
   # LOCALE
