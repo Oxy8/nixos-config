@@ -73,9 +73,9 @@
   # SWAP + SLEEP
   
   
-  services.logind.extraConfig = ''
-    InhibitDelayMaxSec=15
-  '';
+  #services.logind.extraConfig = ''
+  #  InhibitDelayMaxSec=15
+  #'';
   
   powerManagement.powerDownCommands = 
     ''
@@ -228,11 +228,11 @@
   users.users.estevan = {
     isNormalUser = true;
     description = "Estevan Küster";
-    extraGroups = [ "networkmanager" "wheel" ];
+    extraGroups = [ "networkmanager" "wheel" "docker"];
     packages = with pkgs; [
       firefox
       google-chrome
-      onlyoffice-bin
+      libreoffice-still
       # wineWowPackages.stable
       # mono # .NET replacement for wine
       fragments # Torrent
@@ -246,7 +246,7 @@
       foliate
       openvpn
       nnn
-      anki
+      vim
     ];
   };
   
@@ -259,20 +259,17 @@
   # List packages installed in system profile.
   environment.systemPackages = with pkgs; [
     lshw
-    rage
+    distrobox
     # linuxKernel.packages.linux_6_1.vmware
     # vmware-workstation
   ];
+  
+  virtualisation.podman = {
+    enable = true;
+    dockerCompat = true;
+  };
 
 
-  #=-=-=-=-=
-  # Docker
-  #  virtualisation.docker.enable = true;
-  #  virtualisation.docker.daemon.settings = {
-  #    data-root = "/home/estevan/Ambientes/.DOCKER";
-  #  };
- 
- 
   #=-=-=-=-=
   # VMware
   # virtualisation.vmware.host.enable = true;	
@@ -297,7 +294,7 @@
       };
       
       core = {
-      	editor = "micro";
+      	editor = "gted";
       };
       
       init = {
