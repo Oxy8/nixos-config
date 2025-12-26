@@ -7,7 +7,7 @@
 
 let
   unstable = import inputs.nixpkgs-unstable {
-    system = pkgs.system;
+    system = pkgs.stdenv.hostPlatform.system;
     config.allowUnfree = true; 
   };
 in
@@ -140,8 +140,8 @@ in
   services.displayManager.autoLogin.user = "estevan";
 
   # Enables Gnome DE
-  services.xserver.displayManager.gdm.enable = true;
-  services.xserver.desktopManager.gnome.enable = true;
+  services.displayManager.gdm.enable = true;
+  services.desktopManager.gnome.enable = true;
 
   environment.gnome.excludePackages = (with pkgs; [
     gnome-tour
@@ -252,7 +252,7 @@ in
       discord
       spotify
       prismlauncher
-      inputs.nix-software-center.packages.${system}.nix-software-center
+      inputs.nix-software-center.packages.${stdenv.hostPlatform.system}.nix-software-center
       thunderbird
       foliate
       openvpn
