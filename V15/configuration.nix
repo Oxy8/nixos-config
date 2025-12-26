@@ -4,6 +4,13 @@
 
 { config, pkgs, inputs, ... }:
 
+
+let
+  unstable = import inputs.nixpkgs-unstable {
+    system = pkgs.system;
+    config.allowUnfree = true; 
+  };
+in
 {
   imports =
     [ # Include the results of the hardware scan.
@@ -138,6 +145,7 @@
 
   environment.gnome.excludePackages = (with pkgs; [
     gnome-tour
+    gnome-text-editor # Removed because of errors in current version.
   ]);
   
   services.gnome.games.enable = false;
@@ -250,6 +258,7 @@
       openvpn
       nnn
       vim
+      unstable.gnome-text-editor
     ];
   };
   
