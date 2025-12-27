@@ -3,12 +3,14 @@
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-25.11";
+    
+    nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
 
     nix-software-center.url = "github:vlinkz/nix-software-center";
 
   };
 
-  outputs = { nixpkgs, nix-software-center, home-manager, ... }@inputs:
+  outputs = { nixpkgs, nix-software-center, ... }@inputs:
 
 	{
 		nixosConfigurations = {
