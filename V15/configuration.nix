@@ -146,6 +146,7 @@ in
   environment.gnome.excludePackages = (with pkgs; [
     gnome-tour
     gnome-text-editor # Removed because of errors in current version.
+    epiphany
   ]);
   
   services.gnome.games.enable = false;
