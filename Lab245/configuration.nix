@@ -182,7 +182,6 @@
     packages = with pkgs; [
       firefox
       google-chrome
-      onlyoffice-bin
       ghex
       dconf-editor
       discord
@@ -192,6 +191,8 @@
       teams-for-linux
       filezilla
       inkscape
+      protege
+      libreoffice-still
     ];
   };
   
