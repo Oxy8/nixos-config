@@ -4,6 +4,13 @@
 
 { config, pkgs, inputs, ... }:
 
+
+let
+  unstable = import inputs.nixpkgs-unstable {
+    system = pkgs.stdenv.hostPlatform.system;
+    config.allowUnfree = true; 
+  };
+in
 {
   imports =
     [ # Include the results of the hardware scan.
@@ -35,10 +42,13 @@
   # -------------------------------------------------------------------
   
   networking.hostName = "V15";
-
-  # -------------------------------------------------------------------
   
   networking.firewall.enable = false;
+  
+  networking.networkmanager = {
+    enable = true;
+    plugins = [ pkgs.networkmanager-openvpn ]; 
+  };
 
   # -------------------------------------------------------------------
   # LOCALE
@@ -73,9 +83,9 @@
   # SWAP + SLEEP
   
   
-  services.logind.extraConfig = ''
-    InhibitDelayMaxSec=15
-  '';
+  #services.logind.extraConfig = ''
+  #  InhibitDelayMaxSec=15
+  #'';
   
   powerManagement.powerDownCommands = 
     ''
@@ -130,11 +140,13 @@
   services.displayManager.autoLogin.user = "estevan";
 
   # Enables Gnome DE
-  services.xserver.displayManager.gdm.enable = true;
-  services.xserver.desktopManager.gnome.enable = true;
+  services.displayManager.gdm.enable = true;
+  services.desktopManager.gnome.enable = true;
 
   environment.gnome.excludePackages = (with pkgs; [
     gnome-tour
+    gnome-text-editor # Removed because of errors in current version.
+    epiphany
   ]);
   
   services.gnome.games.enable = false;
@@ -228,11 +240,11 @@
   users.users.estevan = {
     isNormalUser = true;
     description = "Estevan Küster";
-    extraGroups = [ "networkmanager" "wheel" ];
+    extraGroups = [ "networkmanager" "wheel" "docker"];
     packages = with pkgs; [
       firefox
       google-chrome
-      onlyoffice-bin
+      libreoffice-still
       # wineWowPackages.stable
       # mono # .NET replacement for wine
       fragments # Torrent
@@ -241,12 +253,13 @@
       discord
       spotify
       prismlauncher
-      inputs.nix-software-center.packages.${system}.nix-software-center
+      inputs.nix-software-center.packages.${stdenv.hostPlatform.system}.nix-software-center
       thunderbird
       foliate
       openvpn
       nnn
-      anki
+      vim
+      unstable.gnome-text-editor
     ];
   };
   
@@ -259,20 +272,17 @@
   # List packages installed in system profile.
   environment.systemPackages = with pkgs; [
     lshw
-    rage
+    distrobox
     # linuxKernel.packages.linux_6_1.vmware
     # vmware-workstation
   ];
+  
+  virtualisation.podman = {
+    enable = true;
+    dockerCompat = true;
+  };
 
 
-  #=-=-=-=-=
-  # Docker
-  #  virtualisation.docker.enable = true;
-  #  virtualisation.docker.daemon.settings = {
-  #    data-root = "/home/estevan/Ambientes/.DOCKER";
-  #  };
- 
- 
   #=-=-=-=-=
   # VMware
   # virtualisation.vmware.host.enable = true;	
@@ -297,7 +307,7 @@
       };
       
       core = {
-      	editor = "micro";
+      	editor = "gted";
       };
       
       init = {

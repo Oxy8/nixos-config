@@ -2,16 +2,15 @@
   description = "Config";
 
   inputs = {
-    nixpkgs.url = "github:NixOS/nixpkgs/nixos-25.05";
-    home-manager = {
-      url = "github:nix-community/home-manager/release-25.05";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-25.11";
+    
+    nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
 
     nix-software-center.url = "github:vlinkz/nix-software-center";
+
   };
 
-  outputs = { nixpkgs, nix-software-center, home-manager, ... }@inputs:
+  outputs = { nixpkgs, nix-software-center, ... }@inputs:
 
 	{
 		nixosConfigurations = {
@@ -31,8 +30,8 @@
 		      	modules = [
 		      		./V15/configuration.nix
 					./V15/keyboard-led-update.nix
+					
 		      	];
-		      	
 			};
 
 			Lab245 = nixpkgs.lib.nixosSystem {
@@ -42,18 +41,6 @@
 		      	modules = [ ./Lab245/configuration.nix ];
 		      	
 			};
-				
 		};
-		
-		nixosModules = {
-		# ...
-			declarativeHome = { ... }: {
-				config = {
-					home-manager.useGlobalPkgs = true;
-					home-manager.useUserPackages = true;
-				};
-			};
-		};
-
 	};
 }
