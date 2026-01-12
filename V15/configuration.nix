@@ -240,7 +240,7 @@ in
   users.users.estevan = {
     isNormalUser = true;
     description = "Estevan Küster";
-    extraGroups = [ "networkmanager" "wheel" "docker"];
+    extraGroups = [ "networkmanager" "wheel" "podman" ];
     packages = with pkgs; [
       firefox
       google-chrome
@@ -280,6 +280,8 @@ in
   virtualisation.podman = {
     enable = true;
     dockerCompat = true;
+    dockerSocket.enable = true;
+    defaultNetwork.settings.dns_enabled = true;
   };
 
 
