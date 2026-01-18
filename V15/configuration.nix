@@ -260,6 +260,7 @@ in
       nnn
       vim
       unstable.gnome-text-editor
+      apostrophe
     ];
   };
   

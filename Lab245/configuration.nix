@@ -193,6 +193,7 @@
       inkscape
       protege
       libreoffice-still
+      apostrophe
     ];
   };
   
