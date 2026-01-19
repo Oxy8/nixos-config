@@ -300,6 +300,7 @@ in
   programs.git = {
     enable = true;
     config = {
+    	  credential.helper = "store";
       user = {
       	email = "34687508+Oxy8@users.noreply.github.com";
       	name = "Oxy8";
