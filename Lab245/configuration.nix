@@ -178,7 +178,7 @@
   users.users.estevan = {
     isNormalUser = true;
     description = "Estevan Zanetti Küster";
-    extraGroups = [ "networkmanager" "wheel" ];
+    extraGroups = [ "networkmanager" "wheel" "podman" ];
     packages = with pkgs; [
       firefox
       google-chrome
@@ -206,17 +206,17 @@
   # List packages installed in system profile.
   environment.systemPackages = with pkgs; [
     lshw
+    distrobox
+    docker-compose
   ];
-
-
-  #=-=-=-=-=
-  # Docker
-  #  virtualisation.docker.enable = true;
-  #  virtualisation.docker.daemon.settings = {
-  #    data-root = "/home/estevan/Ambientes/.DOCKER";
-  #  };
+  
+  virtualisation.podman = {
+    enable = true;
+    dockerCompat = true;
+    dockerSocket.enable = true;
+    defaultNetwork.settings.dns_enabled = true;
+  };
  
-
 
   # -------------------------------------------------------------------
   # GIT
