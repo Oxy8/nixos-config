@@ -34,11 +34,11 @@
 		      	];
 			};
 
-			Lab245 = nixpkgs.lib.nixosSystem {
+			Lab245-2 = nixpkgs.lib.nixosSystem {
 			
 		      	system = "x86_64-linux";
 		      	specialArgs = { inherit inputs; };
-		      	modules = [ ./Lab245/configuration.nix ];
+		      	modules = [ ./Lab245-2/configuration.nix ];
 		      	
 			};
 		};
