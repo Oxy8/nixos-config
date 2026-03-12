@@ -36,3 +36,9 @@ sudo nix-env --delete-generations 60d --profile /nix/var/nix/profiles/system \
 sudo /nix/var/nix/profiles/system/bin/switch-to-configuration switch \
 nix-store --gc
 
+# Optimise  
+
+nix-store --optimise  
+
+
+
